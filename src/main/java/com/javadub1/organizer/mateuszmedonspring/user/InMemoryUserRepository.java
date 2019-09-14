@@ -8,14 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+
 public class InMemoryUserRepository implements UserRepository {
 
     private List<User> users;
     private RepositoryHelper repositoryHelper;
 
-    @Autowired
-    public InMemoryUserRepository(RepositoryHelper repositoryHelper) {
+    public InMemoryUserRepository() {
         this.users = new ArrayList<>();
         this.repositoryHelper = repositoryHelper;
     }
