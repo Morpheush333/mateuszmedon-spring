@@ -7,14 +7,12 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.Optional;
 
-import static org.junit.Assert.*;
-
-public class InMemoryUserReposytoryTest {
-    private InMemoryUserReposytory inMemoryUserReposytory;
+public class InMemoryUserRepositoryTest {
+    private InMemoryUserRepository inMemoryUserReposytory;
 
     @Before
     public void init() {
-        this.inMemoryUserReposytory = new InMemoryUserReposytory(Arrays.asList(
+        this.inMemoryUserReposytory = new InMemoryUserRepository(Arrays.asList(
                 new User(1L,"Szymon","Nowak", Gender.MALE),
                 new User(2L,"Lord","Voldemort", Gender.MALE),
                 new User(3L,"Wife Bilbo", "Baggins'a", Gender.FEMALE)

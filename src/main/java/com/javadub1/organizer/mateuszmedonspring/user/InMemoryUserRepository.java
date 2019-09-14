@@ -1,21 +1,22 @@
 package com.javadub1.organizer.mateuszmedonspring.user;
 
-import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
-public class InMemoryUserReposytory implements UserReposytory {
+@Component
+public class InMemoryUserRepository implements UserRepository {
 
     private List<User> users;
 
-    public InMemoryUserReposytory() {
+    public InMemoryUserRepository() {
         this.users = new ArrayList<>();
     }
 
-    InMemoryUserReposytory(List<User> users) {
+    InMemoryUserRepository(List<User> users) {
         this.users = users;
     }
 
@@ -35,7 +36,8 @@ public class InMemoryUserReposytory implements UserReposytory {
         return new ArrayList<>(users);
     }
 
-    private void init() {
+    @PostConstruct
+    public void init() {
         this.users.add(new User(1L, "Szymon", "Nowak", Gender.MALE));
         this.users.add(new User(2L, "Mateusz", "Medon", Gender.MALE));
         this.users.add(new User(3L, "Barbara", "Medon", Gender.FEMALE));
