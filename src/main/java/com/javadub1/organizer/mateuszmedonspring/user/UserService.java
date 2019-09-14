@@ -4,10 +4,11 @@ package com.javadub1.organizer.mateuszmedonspring.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service
 public class UserService {
     private UserRepository userRepository;
 
