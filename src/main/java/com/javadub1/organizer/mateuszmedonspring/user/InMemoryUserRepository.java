@@ -15,7 +15,8 @@ public class InMemoryUserRepository implements UserRepository {
     private List<User> users;
     private RepositoryHelper repositoryHelper;
 
-    public InMemoryUserRepository() {
+    @Autowired
+    public InMemoryUserRepository(RepositoryHelper repositoryHelper) {
         this.users = new ArrayList<>();
         this.repositoryHelper = repositoryHelper;
     }
