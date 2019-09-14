@@ -7,7 +7,9 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.Optional;
 
-public class InMemoryUserRepositoryTest {
+import static org.junit.Assert.*;
+
+public class InMemoryUserReposytoryTest {
     private InMemoryUserRepository inMemoryUserReposytory;
 
     @Before
