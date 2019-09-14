@@ -1,12 +1,13 @@
 package com.javadub1.organizer.mateuszmedonspring.user;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Repository
 public class FileBasedUserRepository implements UserRepository {
 
     @Override
