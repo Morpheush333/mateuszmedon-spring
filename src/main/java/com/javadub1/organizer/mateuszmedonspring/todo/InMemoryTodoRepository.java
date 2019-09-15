@@ -17,25 +17,23 @@ public class InMemoryTodoRepository implements TodoRepository {
     private List<Todo> todoList;
 
     InMemoryTodoRepository(List<Todo> todoList) {
-        this.todoList = todoList;
+        this.todoList = new ArrayList<>(todoList);
     }
     @Autowired
     public InMemoryTodoRepository() {
+        this.todoList = new ArrayList<>();
     }
 
     @Override
     public List<Todo> findAll() {
-        return new ArrayList<>();
+        return new ArrayList<>(todoList);
     }
 
     @Override
     public Optional<Todo> findById(Long id) {
-        if(id == null || id <= 0){
-            throw new IllegalArgumentException();
-        }
         return todoList.stream()
                 .filter(todo -> id.equals(todo.getId()))
-                .findAny();
+                .findFirst();
     }
 
     @Override

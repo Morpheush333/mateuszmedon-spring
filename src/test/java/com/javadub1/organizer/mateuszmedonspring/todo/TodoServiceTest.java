@@ -6,21 +6,23 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.Optional;
+import java.util.List;
 
 
 public class TodoServiceTest {
 
-    private InMemoryTodoRepository inMemoryTodoRepository;
+    private TodoService todoService;
 
     @Before
     public void init() {
-        this.inMemoryTodoRepository = new InMemoryTodoRepository(Arrays.asList(
+
+        this.todoService = new TodoService(new InMemoryTodoRepository(Arrays.asList(
                 new Todo(1L,"Hospital","Meeting physiuoterapy 22 Oct", TodoStatus.IN_PROGRES),
                 new Todo(2L,"Birthday","7 April", TodoStatus.DONE),
                 new Todo(3L,"Appointment work","Angelina's 16 Nov", TodoStatus.NEW),
                 new Todo(4L,"Abracadabra","SSSSSS", TodoStatus.IN_PROGRES)
-        ));
+
+        )));
 
     }
 
@@ -31,7 +33,7 @@ public class TodoServiceTest {
         Long id = null;
 
         //when
-        inMemoryTodoRepository.findById(id);
+        todoService.findById(id);
 
 //        then
 //        exception it thrown
@@ -47,19 +49,17 @@ public class TodoServiceTest {
         // definition in annotation test
 
         //then
-        inMemoryTodoRepository.findById(id);
+        todoService.findById(id);
     }
 
-    @Test
+    @Test(expected = TodoNotFoundException.class)
     public void findByID_ShouldReturnEmptyOptionalForNonExistingId() {
         //given
         Long id = 5L;
 
         //when
-        Optional<Todo> actual = inMemoryTodoRepository.findById(id);
+        Todo actual = todoService.findById(id);
 
-        //then
-        Assert.assertFalse("Optional is not empty. User found", actual.isPresent());
     }
 
     @Test
@@ -69,26 +69,27 @@ public class TodoServiceTest {
         Todo expectedUser = new Todo(3L,"Appointment work","Angelina's 16 Nov", TodoStatus.NEW);
 
         //when
-        Optional<Todo> actual = inMemoryTodoRepository.findById(id);
+        Todo actual = todoService.findById(id);
 
         //then
-        Assert.assertTrue("Optional is empty. User not found", actual.isPresent());
-        Assert.assertEquals("Found user is not the correct one", expectedUser, actual.get());
+        Assert.assertEquals("Found user is not the correct one", expectedUser, actual);
     }
 
 //    ------------------------------------------------------------------------------------------------------
 
-    @Test(expected = IllegalArgumentException.class)
-    public void findByStatus_ShouldReturn(){
+    @Test
+    public void findByStatus_ShouldReturnListOfTodoForGivenStatus(){
         //given
-        TodoStatus status = TodoStatus.DONE;
+        TodoStatus status = TodoStatus.NEW;
+        Todo expected =  new Todo(3L,"Appointment work","Angelina's 16 Nov", TodoStatus.NEW);
 
 
         //when
-
+        List<Todo> actual = todoService.findByStatus(status);
 
         //then
-        inMemoryTodoRepository.findByStatus(status);
+        Assert.assertEquals("List should have exactly one todo", 1,actual.size());
+        Assert.assertEquals("Todo should be equal the expected one", expected, actual.get(0));
 
     }
 }

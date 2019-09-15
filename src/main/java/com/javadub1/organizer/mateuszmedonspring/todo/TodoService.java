@@ -14,8 +14,11 @@ public class TodoService {
     }
 
     public Todo findById(Long id) {
+        if(id == null || id <=0){
+            throw new IllegalArgumentException(id + "is invalid");
+        }
         return todoRepository.findById(id)
-                .orElseThrow(() -> new ToDoNotFoundException(id));
+                .orElseThrow(() -> new TodoNotFoundException(id));
     }
 
     public List<Todo> findAll(){
