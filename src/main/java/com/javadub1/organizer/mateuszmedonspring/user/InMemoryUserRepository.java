@@ -14,11 +14,13 @@ public class InMemoryUserRepository implements UserRepository {
 
     private List<User> users;
     private RepositoryHelper repositoryHelper;
+    private int nextId;
 
     @Autowired
     public InMemoryUserRepository(RepositoryHelper repositoryHelper) {
         this.users = new ArrayList<>();
         this.repositoryHelper = repositoryHelper;
+        this.nextId = 1;
     }
 
     InMemoryUserRepository(List<User> users) {
@@ -41,11 +43,19 @@ public class InMemoryUserRepository implements UserRepository {
         return new ArrayList<>(users);
     }
 
+    @Override
+    public void save(User user) {
+        user.setId((long) nextId++);
+        users.add(user);
+    }
+
     @PostConstruct
     public void init() {
-        this.users.add(new User(1L, "Szymon", "Nowak", Gender.MALE));
-        this.users.add(new User(2L, "Mateusz", "Medon", Gender.MALE));
-        this.users.add(new User(3L, "Barbara", "Medon", Gender.FEMALE));
-        this.users.add(new User(4L, "Piotr", "Kowalik", Gender.LGBT));
+        if (this.users.size() == 0) {
+            save(new User(1L, "Szymon", "Nowak", Gender.MALE));
+            save(new User(2L, "Mateusz", "Medon", Gender.MALE));
+            save(new User(3L, "Barbara", "Medon", Gender.FEMALE));
+            save(new User(4L, "Piotr", "Kowalik", Gender.LGBT));
+        }
     }
 }

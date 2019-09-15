@@ -7,5 +7,21 @@
            th:href="'/users/' + ${user.id}"
            th:text="${user.fullName}">Mateusz Medon</a></li>
 </ul>
+
+<form action="/users" method="post">
+    FirstName<input type="text" name="firstName">
+
+    <br/>
+    LastName <input type="text" name="lastName">
+
+    <br/>
+    Gender
+    <select name="gender" id="gender">
+        <option value="MALE">Male</option>
+        <option value="FEMALE">Female</option>
+    </select>
+    <br/>
+    <input type="submit" value="Submit">
+</form>
 </body>
 </html>

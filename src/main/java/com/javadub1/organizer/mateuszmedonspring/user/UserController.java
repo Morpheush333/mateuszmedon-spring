@@ -1,10 +1,7 @@
 package com.javadub1.organizer.mateuszmedonspring.user;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -28,5 +25,12 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView("user-view");
         modelAndView.addObject("user", userService.findById(id));
         return modelAndView;
+    }
+
+    @PostMapping("/users")
+    public String saveUser(@ModelAttribute User user) {
+        userService.saveUser(user);
+        return "redirect:/users";
+
     }
 }
