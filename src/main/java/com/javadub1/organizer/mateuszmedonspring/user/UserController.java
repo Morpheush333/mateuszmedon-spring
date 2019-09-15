@@ -18,8 +18,8 @@ public class UserController {
 
     @GetMapping(path = "/users")
     public ModelAndView hello() {
-        ModelAndView modelAndView = new ModelAndView("hello");
-        modelAndView.addObject("message","Hello Mateusz");
+        ModelAndView modelAndView = new ModelAndView("users-view");
+        modelAndView.addObject("users", userService.findAll());
         return modelAndView;
     }
 
