@@ -31,12 +31,9 @@ public class InMemoryTodoRepository implements TodoRepository {
 
     @Override
     public Optional<Todo> findById(Long id) {
-        if(id == null || id <= 0){
-            throw new IllegalArgumentException();
-        }
         return todoList.stream()
                 .filter(todo -> id.equals(todo.getId()))
-                .findAny();
+                .findFirst();
     }
 
     @Override
