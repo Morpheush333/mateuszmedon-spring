@@ -6,16 +6,13 @@ import com.javadub1.organizer.mateuszmedonspring.user.exceptions.UserNotFoundExc
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class UserService {
-    private UserRepository userRepository;
     private JpaUserRepository jpaUserRepository;
 
-    public UserService(@Qualifier("inMemoryUserRepository") UserRepository userRepository,JpaUserRepository jpaUserRepository) {
-        this.userRepository = userRepository;
+    public UserService(JpaUserRepository jpaUserRepository) {
         this.jpaUserRepository = jpaUserRepository;
     }
 
@@ -31,7 +28,7 @@ public class UserService {
     public List<User> findByGender(String gender){
         try {
             Gender enumGender = Gender.valueOf(gender);
-            return userRepository.findByGender(enumGender);
+            return jpaUserRepository.findByGender(enumGender);
         }catch (IllegalArgumentException e) {
             throw new InvalidParameterException("gender");
         }
