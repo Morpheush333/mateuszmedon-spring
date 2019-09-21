@@ -2,12 +2,12 @@ package com.javadub1.organizer.mateuszmedonspring.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 public class InMemoryUserRepository implements UserRepository {
@@ -23,6 +23,7 @@ public class InMemoryUserRepository implements UserRepository {
         this.nextId = 1;
     }
 
+//    constructor protected for tests
     InMemoryUserRepository(List<User> users) {
         this.users = users;
     }
@@ -41,6 +42,13 @@ public class InMemoryUserRepository implements UserRepository {
     @Override
     public List<User> findAll() {
         return new ArrayList<>(users);
+    }
+
+    @Override
+    public List<User> findByGender(Gender gender) {
+        return users.stream()
+                .filter(user -> gender.equals(user.getGender()))
+                .collect(Collectors.toList());
     }
 
     @Override

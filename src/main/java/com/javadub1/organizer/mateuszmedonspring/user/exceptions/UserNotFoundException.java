@@ -1,4 +1,4 @@
-package com.javadub1.organizer.mateuszmedonspring.user;
+package com.javadub1.organizer.mateuszmedonspring.user.exceptions;
 
 public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException(Long id) {

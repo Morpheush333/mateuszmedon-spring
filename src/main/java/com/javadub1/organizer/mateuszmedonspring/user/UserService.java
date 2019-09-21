@@ -1,9 +1,9 @@
 package com.javadub1.organizer.mateuszmedonspring.user;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.javadub1.organizer.mateuszmedonspring.user.exceptions.InvalidParameterException;
+import com.javadub1.organizer.mateuszmedonspring.user.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +23,15 @@ public class UserService {
 
     public List<User> findAll() {
         return userRepository.findAll();
+    }
+
+    public List<User> findByGender(String gender){
+        try {
+            Gender enumGender = Gender.valueOf(gender);
+            return userRepository.findByGender(enumGender);
+        }catch (IllegalArgumentException e) {
+            throw new InvalidParameterException("gender");
+        }
     }
 
     public void saveUser(User user) {
