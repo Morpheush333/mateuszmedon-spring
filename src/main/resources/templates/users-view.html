@@ -1,0 +1,46 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <style>
+        .gender-button {
+            border: 1px solid black;
+            padding: 5px;
+        }
+        .male {
+            background-color: lightblue;
+        }
+        .female {
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+
+<div>
+    <a class="gender-button male" href="/users?g=MALE">MALE</a>
+    <a class="gender-button female" href="/users?g=FEMALE">FEMALE</a>
+</div>
+
+<ul>
+    <li th:each="user : ${users}">
+        <a href="/users/1"
+           th:href="'/users/' + ${user.id}"
+           th:text="${user.fullName}">Mateusz Medon</a></li>
+</ul>
+
+<form action="/users" method="post">
+    FirstName<input type="text" name="firstName">
+
+    <br/>
+    LastName <input type="text" name="lastName">
+
+    <br/>
+    Gender
+    <select name="gender" id="gender">
+        <option value="MALE">Male</option>
+        <option value="FEMALE">Female</option>
+    </select>
+    <br/>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>
