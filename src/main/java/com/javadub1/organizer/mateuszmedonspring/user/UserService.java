@@ -1,9 +1,10 @@
 package com.javadub1.organizer.mateuszmedonspring.user;
 
 
+import com.javadub1.organizer.mateuszmedonspring.user.entities.Gender;
+import com.javadub1.organizer.mateuszmedonspring.user.entities.User;
 import com.javadub1.organizer.mateuszmedonspring.user.exceptions.InvalidParameterException;
 import com.javadub1.organizer.mateuszmedonspring.user.exceptions.UserNotFoundException;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

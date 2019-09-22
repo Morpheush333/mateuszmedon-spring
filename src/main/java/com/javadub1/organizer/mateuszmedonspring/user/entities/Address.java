@@ -1,4 +1,4 @@
-package com.javadub1.organizer.mateuszmedonspring.user;
+package com.javadub1.organizer.mateuszmedonspring.user.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,17 +11,13 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class User {
+@NoArgsConstructor
+public class Address {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String firstName;
-    private String lastName;
-    private Gender gender;
-
-    public String getFullName() {
-        return firstName + " " + lastName;
-    }
+    private String city;
+    private String street;
 }

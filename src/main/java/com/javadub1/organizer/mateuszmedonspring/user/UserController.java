@@ -1,5 +1,6 @@
 package com.javadub1.organizer.mateuszmedonspring.user;
 
+import com.javadub1.organizer.mateuszmedonspring.user.entities.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
