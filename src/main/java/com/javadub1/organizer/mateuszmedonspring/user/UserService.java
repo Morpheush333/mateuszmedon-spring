@@ -1,40 +1,41 @@
 package com.javadub1.organizer.mateuszmedonspring.user;
 
 
+import com.javadub1.organizer.mateuszmedonspring.user.entities.Gender;
+import com.javadub1.organizer.mateuszmedonspring.user.entities.User;
 import com.javadub1.organizer.mateuszmedonspring.user.exceptions.InvalidParameterException;
 import com.javadub1.organizer.mateuszmedonspring.user.exceptions.UserNotFoundException;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class UserService {
-    private UserRepository userRepository;
+    private JpaUserRepository jpaUserRepository;
 
-    public UserService(@Qualifier("inMemoryUserRepository") UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserService(JpaUserRepository jpaUserRepository) {
+        this.jpaUserRepository = jpaUserRepository;
     }
 
     public User findById(Long id) {
-        return userRepository.findById(id)
+        return jpaUserRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
 
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public Iterable<User> findAll() {
+        return jpaUserRepository.findAll();
     }
 
     public List<User> findByGender(String gender){
         try {
             Gender enumGender = Gender.valueOf(gender);
-            return userRepository.findByGender(enumGender);
+            return jpaUserRepository.findByGender(enumGender);
         }catch (IllegalArgumentException e) {
             throw new InvalidParameterException("gender");
         }
     }
 
     public void saveUser(User user) {
-        userRepository.save(user);
+        jpaUserRepository.save(user);
     }
 }

@@ -20,7 +20,7 @@ public class CustomExceptionHandler {
     @ExceptionHandler(InvalidParameterException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ModelAndView handlerInvalidParameterException(InvalidParameterException e){
-        ModelAndView modelAndView = new ModelAndView("/errors/bad-request");
+        ModelAndView modelAndView = new ModelAndView("errors/bad-request");
         modelAndView.addObject("message",e.getMessage());
         return modelAndView;
     }
