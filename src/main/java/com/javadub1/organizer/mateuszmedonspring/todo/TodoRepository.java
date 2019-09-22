@@ -1,11 +1,14 @@
 package com.javadub1.organizer.mateuszmedonspring.todo;
 
+import com.javadub1.organizer.mateuszmedonspring.todo.entities.Todo;
+import com.javadub1.organizer.mateuszmedonspring.todo.entities.TodoStatus;
+
+import org.springframework.data.repository.CrudRepository;
+
 import java.util.List;
-import java.util.Optional;
 
-public interface TodoRepository {
 
-    List<Todo> findAll();
-    Optional<Todo> findById(Long id);
-    List<Todo>findByStatus(TodoStatus status);
+public interface TodoRepository extends CrudRepository<Todo, Long> {
+    List<Todo> findByStatus(TodoStatus status);
+
 }

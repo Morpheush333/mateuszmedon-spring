@@ -1,0 +1,52 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <style>
+        .gender-button {
+            border: 1px solid black;
+            padding: 5px;
+        }
+        .new {
+            background-color: lightblue;
+        }
+        .in_progress {
+            background-color: pink;
+        }
+        .done {
+            background-color: chocolate;
+        }
+    </style>
+</head>
+<body>
+
+<div>
+    <a class="gender-button new" href="/todos?g=new">NEW</a>
+    <a class="gender-button in_progress" href="/todos?g=in_progress">IN_PROGRESS</a>
+    <a class="gender-button done" href="/todos?g=done">DONE</a>
+</div>
+
+<ul>
+    <li th:each="todo : ${todos}">
+        <a href="/todos/1"
+           th:href="'/todos/' + ${todo.id}"
+           th:text="${todo.title}">Mateusz Medon</a>
+    </li>
+</ul>
+
+<form action="/todos" method="post">
+    Name<input type="text" name="title">
+
+    <br/>
+    Description <input type="text" name="description">
+
+    <br/>
+    Status
+    <select name="status" id="status">
+        <option value="NEW">NEW</option>
+        <option value="IN_PROGRESS">IN_PROGRESS</option>
+        <option value="DONE">DONE</option>
+    </select>
+    <br/>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>
